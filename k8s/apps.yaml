@@ -1,4 +1,4 @@
-# clusters/microk8s/apps.yaml
+# k8s/apps.yaml
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
