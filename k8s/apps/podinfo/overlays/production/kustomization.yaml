@@ -4,5 +4,5 @@ namespace: prod-podinfo
 resources:
   - ../../base
   - namespace.yaml
-patchesStrategicMerge:
+patches:
   - patch-deployment.yaml
