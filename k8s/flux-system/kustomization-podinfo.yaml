@@ -4,8 +4,8 @@ metadata:
   name: podinfo
   namespace: flux-system
 spec:
-  interval: 5m0s
-  path: "./apps/podinfo/overlays/production"  # relative to the root of the repo (k8s folder)
+  interval: 5m
+  path: "./k8s/apps/podinfo/overlays/production"  # relative to the root of the repo (k8s folder)
   prune: true
   sourceRef:
     kind: GitRepository
