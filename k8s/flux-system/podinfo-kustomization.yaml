@@ -5,8 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: "./k8s/apps/podinfo/overlays/production"  # relative to the root of the repo (k8s folder)
+  path: ./k8s/apps/podinfo/overlays/production  # Path to the overlay
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: flux-system  # Should match the GitRepository managing your repo
+  validation: client
