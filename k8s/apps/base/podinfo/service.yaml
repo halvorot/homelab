@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: podinfo
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: podinfo
   ports:
@@ -11,3 +11,4 @@ spec:
       port: 9898
       protocol: TCP
       targetPort: http
+      nodePort: 30007  # Port to expose on each node (must be within the range 30000-32767)
