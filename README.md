@@ -12,6 +12,6 @@ This repository contains some files and configuration for my home lab setup.
 ## Infrastructure
 
 ### K8S
-
+See the [K8S README](k8s/README.md)
 
 ## Services

@@ -14,3 +14,13 @@ Flux uses GitOps practices and a pull-based deployment model.
 The deployments are structured in a monorepo approach, see [Ways of structuring your repositories](https://fluxcd.io/flux/guides/repository-structure/).
 Deployment manifests for all apps and services in the cluster are defined here in this repository for Flux to sync and deploy.
 
+## Infrastructure
+
+### Ingress controller
+
+[ingress-nginx](https://github.com/kubernetes/ingress-nginx) is used as the Ingress controller for Kubernetes.
+This acts as a reverse proxy and load balancer.
+
+### Cert manager
+
+[cert-manager](https://cert-manager.io) is used to manage TLS certificates.
