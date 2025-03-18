@@ -14,6 +14,14 @@ Flux uses GitOps practices and a pull-based deployment model.
 The deployments are structured in a monorepo approach, see [Ways of structuring your repositories](https://fluxcd.io/flux/guides/repository-structure/).
 Deployment manifests for all apps and services in the cluster are defined here in this repository for Flux to sync and deploy.
 
+To **update flux**, run the following command and push the changes 
+```
+flux install \                                                                                                                  ⎈ microk8s
+--components-extra image-reflector-controller,image-automation-controller \
+--export > ./k8s/clusters/production/flux-system/gotk-components.yaml
+```
+
+
 ## Infrastructure
 
 ### Ingress controller
