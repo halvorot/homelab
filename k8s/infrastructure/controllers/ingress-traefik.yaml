@@ -73,7 +73,6 @@ subjects:
     name: traefik-ingress-controller
     namespace: traefik
 ---
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
