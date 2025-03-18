@@ -1,183 +1,78 @@
 ---
-apiVersion: v1
-kind: Namespace
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
 metadata:
   name: traefik
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: traefik-ingress-controller
-  namespace: traefik
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - services
-      - endpoints
-      - secrets
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - extensions
-      - networking.k8s.io
-    resources:
-      - ingresses
-      - ingressclasses
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - extensions
-    resources:
-      - ingresses/status
-    verbs:
-      - update
-  - apiGroups:
-      - traefik.containo.us
-    resources:
-      - middlewares
-      - middlewaretcps
-      - ingressroutes
-      - traefikservices
-      - ingressroutetcps
-      - ingressrouteudps
-      - tlsoptions
-      - tlsstores
-      - serverstransports
-    verbs:
-      - get
-      - list
-      - watch
----
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: traefik-ingress-controller
-  namespace: traefik
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: traefik-ingress-controller
-  namespace: traefik
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: traefik-ingress-controller
-subjects:
-  - kind: ServiceAccount
-    name: traefik-ingress-controller
-    namespace: traefik
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: traefik
-  namespace: traefik
-  labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/name: traefik
+  namespace: flux-system
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: traefik
-      app.kubernetes.io/instance: traefik
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: traefik
-        app.kubernetes.io/instance: traefik
+  interval: 1m0s
+  url: https://helm.traefik.io/traefik
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  chart:
     spec:
-      serviceAccountName: traefik-ingress-controller
-      terminationGracePeriodSeconds: 60
-      containers:
-        - name: traefik
-          image: traefik:2.5.4
-          args:
-            - "--entryPoints.web.address=:8000/tcp"
-            - "--entryPoints.websecure.address=:8443/tcp"
-            - "--entryPoints.traefik.address=:9000/tcp"
-            - "--api=true"
-            - "--api.dashboard=true"
-            - "--ping=true"
-            - "--providers.kubernetescrd"
-            - "--providers.kubernetescrd.allowCrossNamespace=true"
-            - "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
-            - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-            - "--certificatesresolvers.myresolver.acme.email=halvorot@gmail.com"
-          readinessProbe:
-            httpGet:
-              path: /ping
-              port: 9000
-            failureThreshold: 1
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 2
-
-          livenessProbe:
-            httpGet:
-              path: /ping
-              port: 9000
-            failureThreshold: 3
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 2
-
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 1000Mi
-            requests:
-              cpu: 100m
-              memory: 50Mi
-
-          ports:
-            - name: web
-              containerPort: 8000
-              protocol: TCP
-
-            - name: websecure
-              containerPort: 8443
-              protocol: TCP
-
-            - name: traefik
-              containerPort: 9000
-              protocol: TCP
-
-          volumeMounts:
-            - mountPath: /data
-              name: storage-volume
-      volumes:
-        - name: storage-volume
-          emptyDir: {}
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+      version: 10.24.3
+  interval: 1m0s
+  releaseName: traefik
+  targetNamespace: default
+  valuesFrom:
+    - kind: Secret
+      name: traefik-secret
 ---
 apiVersion: v1
-kind: Service
+kind: Secret
 metadata:
-  name: traefik
-  namespace: traefik
-  labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/name: traefik
-spec:
-  selector:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/name: traefik
-  type: LoadBalancer
-  externalTrafficPolicy: Local
-  ports:
-    - port: 80
-      name: web
-      targetPort: web
-      protocol: TCP
-    - port: 443
-      name: websecure
-      targetPort: websecure
-      protocol: TCP
+  name: traefik-secret
+  namespace: flux-system
+stringData:
+  values.yaml: |
+    additionalArguments:
+      - "--providers.kubernetescrd.allowCrossNamespace=true"
+      - "--certificatesresolvers.<le-name>.acme.tlschallenge"
+      - "--certificatesresolvers.<le-name>.acme.email=halvorot@gmail.com"
+      - "--certificatesresolvers.<le-name>.acme.storage=/data/acme.json"
+      # Logging
+      - --log.level=info
+      - --log.format=json
+    service:
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        helm.sh/resource-policy: keep
+        meta.helm.sh/release-name: traefik
+        meta.helm.sh/release-namespace: default
+    ports:
+      vault:
+        port: 8200
+        expose: true
+        exposedPort: 8200
+        protocol: TCP
+    persistence:
+      enabled: enable
+      name: data
+      accessMode: ReadWriteOnce
+      size: 1024Mi
+      path: /data
+    podSecurityContext:
+      fsGroup: null
+    deployment: 
+      initContainers:
+        - name: fix-data-dir-permissions
+          image: alpine:3.16.2
+          command:
+            - chown
+            - -R  
+            - 65532:65532
+            - /data
+          volumeMounts:
+            - name: data
+              mountPath: /data
