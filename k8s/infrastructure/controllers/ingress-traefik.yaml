@@ -1,4 +1,9 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -23,7 +28,7 @@ spec:
       version: 10.24.3
   interval: 1m0s
   releaseName: traefik
-  targetNamespace: default
+  targetNamespace: traefik
   valuesFrom:
     - kind: Secret
       name: traefik-secret
