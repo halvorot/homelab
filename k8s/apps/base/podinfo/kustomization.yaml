@@ -4,6 +4,7 @@ namespace: podinfo
 resources:
   - deployment.yaml
   - service.yaml
+  - ingress.yaml
   - namespace.yaml
 commonLabels:
   app: podinfo
