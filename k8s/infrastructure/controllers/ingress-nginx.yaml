@@ -41,4 +41,4 @@ spec:
       ingressClassResource:
         default: true
       extraArgs:
-        enable-ssl-passthrough: ""
+        enable-ssl-passthrough: true
