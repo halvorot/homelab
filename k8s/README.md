@@ -21,8 +21,12 @@ flux install \                                                                  
 --export > ./k8s/clusters/production/flux-system/gotk-components.yaml
 ```
 
-
 ## Infrastructure
+
+### MetalLB
+
+[MetalLB](https://metallb.io) is used as the load balancer to assign IP-addresses. 
+Specifically to the ingress controller.
 
 ### Ingress controller
 
@@ -32,3 +36,10 @@ This acts as a reverse proxy and load balancer.
 ### Cert manager
 
 [cert-manager](https://cert-manager.io) is used to manage TLS certificates.
+
+### Sealed secrets
+
+[Sealed secrets](https://github.com/bitnami-labs/sealed-secrets?tab=readme-ov-file) controller is used to safely manage secrets in a GitOps way.
+The controller runs in the cluster and decrypts the sealed secrets into regular kubernetes secrets.
+The [public key](public-keys/pub-sealed-secrets.pem) can be used to encrypt the secret so that it can safely be stored in git.
+The procedure is explained on the FluxCD website [fluxcd.io/flux/guides/sealed-secrets/](https://fluxcd.io/flux/guides/sealed-secrets/)
