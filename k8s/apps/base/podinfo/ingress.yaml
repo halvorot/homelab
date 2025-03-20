@@ -17,7 +17,3 @@ spec:
                 name: podinfo
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - podinfo.halvorteigen.no
-      secretName: podinfo-ingress-cert
