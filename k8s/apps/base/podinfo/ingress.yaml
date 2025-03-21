@@ -9,7 +9,7 @@ spec:
   tls:
     - hosts:
         - podinfo.halvorteigen.no
-      secretName: my-tls-secret
+      secretName: podinfo-tls-secret
   rules:
     - host: podinfo.halvorteigen.no
       http:
