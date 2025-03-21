@@ -6,6 +6,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - podinfo.halvorteigen.no
+      secretName: my-tls-secret
   rules:
     - host: podinfo.halvorteigen.no
       http:

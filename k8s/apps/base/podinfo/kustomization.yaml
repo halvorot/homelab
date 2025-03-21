@@ -6,5 +6,6 @@ resources:
   - service.yaml
   - ingress.yaml
   - namespace.yaml
+  - certificate.yaml
 commonLabels:
   app: podinfo
