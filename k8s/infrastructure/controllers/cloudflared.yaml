@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cloudflared
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: cloudflared-tunnel-token
+  namespace: cloudflared
+spec:
+  encryptedData:
+    token: AgAH5ObmCfgSelrMtzzlK3z+7IWHM48lZjqmGbsDvFS0Lc/KW8sMGUy4g6+1tHX66WqWVp2ajjBTVhEk3DBwNd7wNJMGVEsG9hVakqMF9eNpblXwdO2/RNkcfQzxCILh4Dj5E4Mweasn1Nav4VN57Alr67gGYelJk0aZPWx62wewIc9FA0gMAApsluHln1rzTt8G407F1VPGOrCdjASCmJEjPwc0ULDvZY9N5sO/Q8zZuG9xM2mSQzKQzq7MZAnnVMZ0WDGoqzCb/Eti1nzxI4aT0UoQSqznWaM89N8vOWNnf+DgvGIhgot+STxiRQvZm6+v5Qz6iSxfdgE5G55p+ugZO2GP0ZUGXCiQ8/dPrCpdgCrc9Uk+DJhBEqBHs5e+wChiKxPZIQnRWWYbcJCNzLGqMM7XqiI2vAtPcUHYWGcRsc2T9TxD6SH6zuhncljHaH8ZWVLy11pLSPddvUhWKT9VTpN1egJcCe3jfD1ceZ6VcMLqYRBMQ8Ve89dmkcgUBmCpGiIqYAislW4kflTvNIyzhJuvjIjmT7HJeKDVq8el7n7+1/iZtL919tXYL4DA2LmqWtviFUxi3QsPpNE7a9PFhfvQIsz3VpPgaixegjzqgiw3QmQozKJg73w4CxSRFheBxDSnv4ETUwL691ECcp0OdYfUmDZVzkEFmmONZhpBoAM1SRcJInC44JBdsceRqs8DTHBeX6PuyJksLmxFfKq7HyuFjBFl64AG4Q54bKguClkZWlGREdwV3gbme+4WmqNh/llG2DvDVc/etVBsZw6ZcURfdvqsAn2wjacDJVqxhPygUduH2MsKZF7tn99CrSZdeVLIQ4MAuXoFkQJT/yTBAn4f/uBNX8eU82tr6eBKmSj8S0R7THsCQEEq5qwUuPRxtKJuFpLV9q8ILx5pKqKyPxoLg6BUyeIjIEXwn447AKPIpA8pfB/s
+  template:
+    metadata:
+      creationTimestamp: null
+      name: cloudflared-tunnel-token
+      namespace: cloudflared
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared
+  namespace: cloudflared
+  labels:
+    app: cloudflared
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared
+  template:
+    metadata:
+      labels:
+        app: cloudflared
+    spec:
+      containers:
+        - name: cloudflared
+          image: cloudflare/cloudflared:2025.2.1
+          args:
+            - "tunnel"
+            - "--no-autoupdate"
+            - "run"
+            - "--token"
+            - "$(TUNNEL_TOKEN)"
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflared-tunnel-token
+                  key: token
