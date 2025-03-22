@@ -2,15 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: podinfo-ingress
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - podinfo.halvorteigen.no
-      secretName: podinfo-tls-secret
   rules:
     - host: podinfo.halvorteigen.no
       http:
