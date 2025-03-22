@@ -8,6 +8,5 @@ resources:
   - service.yaml
 
 commonLabels:
-  app: podinfo
   app.kubernetes.io/part-of: apps
   app.kubernetes.io/managed-by: flux 
