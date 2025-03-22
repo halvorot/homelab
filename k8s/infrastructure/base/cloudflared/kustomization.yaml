@@ -6,5 +6,5 @@ resources:
   - cloudflared.yaml
 
 commonLabels:
-  app.kubernetes.io/part-of: networking
+  app.kubernetes.io/part-of: infrastructure
   app.kubernetes.io/managed-by: flux 
