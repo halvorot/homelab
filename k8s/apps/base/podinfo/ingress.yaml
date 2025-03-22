@@ -4,6 +4,7 @@ metadata:
   name: podinfo-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   tls:
@@ -20,4 +21,4 @@ spec:
               service:
                 name: podinfo
                 port:
-                  number: 9898
+                  number: 80
