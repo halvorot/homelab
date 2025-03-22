@@ -25,15 +25,3 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: podinfo
-  namespace: podinfo
-spec:
-  selector:
-    app: podinfo
-  ports:
-    - port: 80
-      targetPort: 9898 

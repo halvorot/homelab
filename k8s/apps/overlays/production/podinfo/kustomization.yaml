@@ -4,9 +4,5 @@ kind: Kustomization
 resources:
   - ../../../base/podinfo
 
-patchesStrategicMerge:
-  - deployment.yaml
-  - ingress.yaml
-
 commonLabels:
   environment: production 
