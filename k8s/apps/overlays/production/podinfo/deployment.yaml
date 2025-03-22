@@ -15,17 +15,3 @@ spec:
             limits:
               cpu: 1000m
               memory: 512Mi
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: podinfo
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-spec:
-  tls:
-    - hosts:
-        - podinfo.halvorteigen.no
-      secretName: podinfo-tls
-  rules:
-    - host: podinfo.halvorteigen.no 

@@ -6,6 +6,7 @@ resources:
 
 patchesStrategicMerge:
   - deployment.yaml
+  - ingress.yaml
 
 commonLabels:
   environment: production 
