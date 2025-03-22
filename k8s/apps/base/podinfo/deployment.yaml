@@ -23,9 +23,15 @@ spec:
         - name: http
           containerPort: 9898
           protocol: TCP
+        - name: https
+          containerPort: 9899
+          protocol: TCP
         command:
         - ./podinfo
         - --port=9898
+        - --https-port=9899
+        - --cert-path=/data/cert
+        - --key-path=/data/key
         - --level=info
         - --random-delay=false
         - --random-error=false
