@@ -2,70 +2,63 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: podinfo
+  namespace: podinfo
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: podinfo
-  minReadySeconds: 3
-  revisionHistoryLimit: 5
-  progressDeadlineSeconds: 60
-  strategy:
-    rollingUpdate:
-      maxUnavailable: 0
-    type: RollingUpdate
   template:
+    metadata:
+      labels:
+        app: podinfo
     spec:
       containers:
-      - name: podinfod
-        image: ghcr.io/stefanprodan/podinfo:6.8.0
-        imagePullPolicy: IfNotPresent
-        ports:
-        - name: http
-          containerPort: 9898
-          protocol: TCP
-        - name: https
-          containerPort: 9899
-          protocol: TCP
-        command:
-        - ./podinfo
-        - --port=9898
-        - --https-port=9899
-        - --cert-path=/data/cert
-        - --key-path=/data/key
-        - --level=info
-        - --random-delay=false
-        - --random-error=false
-        env:
-        - name: PODINFO_UI_COLOR
-          value: "#34577c"
-        livenessProbe:
-          exec:
-            command:
-            - podcli
-            - check
-            - http
-            - localhost:9898/healthz
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        readinessProbe:
-          exec:
-            command:
-            - podcli
-            - check
-            - http
-            - localhost:9898/readyz
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 64Mi
-        volumeMounts:
-          - name: data
-            mountPath: /data
-      volumes:
-        - name: data
-          emptyDir: {}
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:6.8.0
+          ports:
+            - containerPort: 9898
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo
+  namespace: podinfo
+spec:
+  selector:
+    app: podinfo
+  ports:
+    - port: 80
+      targetPort: 9898
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: podinfo
+  namespace: podinfo
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - podinfo.halvorteigen.no
+      secretName: podinfo-tls
+  rules:
+    - host: podinfo.halvorteigen.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: podinfo
+                port:
+                  number: 80 

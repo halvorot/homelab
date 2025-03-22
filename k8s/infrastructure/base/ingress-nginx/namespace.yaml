@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: podinfo
+  name: ingress-nginx
   labels:
-    app.kubernetes.io/part-of: apps
+    app.kubernetes.io/part-of: infrastructure
     app.kubernetes.io/managed-by: flux 
