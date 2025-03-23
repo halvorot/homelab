@@ -16,26 +16,16 @@ Deployment manifests for all apps and services in the cluster are defined here i
 
 To **update flux**, run the following command and push the changes 
 ```
-flux install \                                                                                                                  ⎈ microk8s
+flux install 
 --components-extra image-reflector-controller,image-automation-controller \
 --export > ./k8s/clusters/production/flux-system/gotk-components.yaml
 ```
 
 ## Infrastructure
 
-### MetalLB
-
-[MetalLB](https://metallb.io) is used as the load balancer to assign IP-addresses. 
-Specifically to the ingress controller.
-
-### Ingress controller
-
-[ingress-nginx](https://github.com/kubernetes/ingress-nginx) is used as the Ingress controller for Kubernetes.
-This acts as a reverse proxy and load balancer.
-
-### Cert manager
-
-[cert-manager](https://cert-manager.io) is used to manage TLS certificates.
+### Cloudflare Tunnel
+A [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) is used to expose services online.
+The tunnel client runs inside the cluster and routes traffic from cloudflare to the correct kubernetes service.
 
 ### Sealed secrets
 
