@@ -25,6 +25,12 @@ spec:
     - Egress
   egress:
     - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0  # Allow external traffic (Cloudflare services)
+      ports:
+        - protocol: TCP
+          port: 443  # HTTPS for Cloudflare API
+    - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: podinfo2
