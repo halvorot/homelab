@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - tunnel-token-secret.yaml
-  - network-policy.yaml
   - deployment.yaml
