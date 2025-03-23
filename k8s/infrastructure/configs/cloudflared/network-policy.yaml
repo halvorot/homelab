@@ -27,10 +27,10 @@ spec:
     - to:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: podinfo
+              kubernetes.io/metadata.name: podinfo2
         - podSelector:
             matchLabels:
-              app: podinfo
+              app: podinfo2
       ports:
         - protocol: TCP
           port: 80
