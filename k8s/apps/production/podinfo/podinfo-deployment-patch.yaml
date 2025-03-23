@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: podinfo
 spec:
+  replicas: 2
   template:
     spec:
       containers:
