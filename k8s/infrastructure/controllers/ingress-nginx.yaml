@@ -22,12 +22,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
   values:
     controller:
       service:
@@ -35,5 +29,3 @@ spec:
         loadBalancerIP: 192.168.1.250
       ingressClassResource:
         default: true
-      extraArgs:
-        enable-ssl-passthrough: true
