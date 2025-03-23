@@ -4,8 +4,6 @@ metadata:
   name: podinfo
 spec:
   minReadySeconds: 3
-  revisionHistoryLimit: 5
-  progressDeadlineSeconds: 60
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -25,12 +23,6 @@ spec:
           ports:
             - name: http
               containerPort: 9898
-              protocol: TCP
-            - name: http-metrics
-              containerPort: 9797
-              protocol: TCP
-            - name: grpc
-              containerPort: 9999
               protocol: TCP
           command:
             - ./podinfo
