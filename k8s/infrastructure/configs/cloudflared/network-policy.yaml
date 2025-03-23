@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-cloudflared
+  namespace: cloudflared
+spec:
+  podSelector:
+    matchLabels:
+      app: cloudflared  # Apply only to Cloudflared pods
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0  # Allow external traffic (Cloudflare services)
+      ports:
+        - protocol: TCP
+          port: 443  # HTTPS for Cloudflare API
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: podinfo
+        - podSelector:
+            matchLabels:
+              app: podinfo
+      ports:
+        - protocol: TCP
+          port: 80
