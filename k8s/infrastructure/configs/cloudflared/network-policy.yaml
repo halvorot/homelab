@@ -1,7 +1,21 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: restrict-cloudflared
+  name: deny-all-egress
+  namespace: cloudflared
+spec:
+  podSelector:
+    matchLabels:
+      app: cloudflared
+  policyTypes:
+    - Egress
+  egress: []  # Deny all outbound traffic by default
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-needed-cloudflared-access
   namespace: cloudflared
 spec:
   podSelector:
