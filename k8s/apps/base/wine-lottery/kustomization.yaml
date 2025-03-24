@@ -5,7 +5,3 @@ resources:
   - deployment.yaml
   - namespace.yaml
   - service.yaml
-
-images:
-  - name: ghcr.io/halvorot/wine-lottery-website
-    newTag: "20250324180437"

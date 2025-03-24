@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: wine-lottery
-          image: ghcr.io/halvorot/wine-lottery-website:latest # Placeholder for Flux
+          image: ghcr.io/halvorot/wine-lottery-website:20250324180437
           imagePullPolicy: Always
           ports:
             - containerPort: 80
