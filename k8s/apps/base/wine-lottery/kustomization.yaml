@@ -3,9 +3,6 @@ kind: Kustomization
 resources:
   - ghcr-secret.yaml
   - deployment.yaml
-  - image-repository.yaml
-  - image-policy.yaml
-  - image-update.yaml
   - namespace.yaml
   - service.yaml
 
