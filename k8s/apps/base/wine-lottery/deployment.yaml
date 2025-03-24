@@ -13,6 +13,8 @@ spec:
       labels:
         app: wine-lottery
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: wine-lottery
           image: ghcr.io/halvorot/wine-lottery-website:20250324180437
