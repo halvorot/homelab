@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wine-lottery
+  namespace: wine-lottery
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wine-lottery
+  template:
+    metadata:
+      labels:
+        app: wine-lottery
+    spec:
+      containers:
+        - name: wine-lottery
+          image: ghcr.io/halvorot/wine-lottery-website:latest # Placeholder for Flux
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
