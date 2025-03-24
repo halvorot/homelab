@@ -11,4 +11,4 @@ resources:
 
 images:
   - name: ghcr.io/halvorot/wine-lottery-website
-    newTag: 20250324180437
+    newTag: "20250324180437"
