@@ -6,6 +6,8 @@ resources:
   - image-repository.yaml
   - image-policy.yaml
   - image-update.yaml
+  - namespace.yaml
+  - service.yaml
 
 images:
   - name: ghcr.io/halvorot/wine-lottery-website
