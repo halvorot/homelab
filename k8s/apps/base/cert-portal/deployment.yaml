@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-portal
+  namespace: cert-portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cert-portal
+  template:
+    metadata:
+      labels:
+        app: cert-portal
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: cert-portal
+          image: ghcr.io/halvorot/cert-portal:20250324195511
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
