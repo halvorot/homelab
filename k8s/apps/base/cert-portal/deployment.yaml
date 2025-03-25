@@ -17,12 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: cert-portal
-          image: ghcr.io/halvorot/cert-portal:20250324195511
+          image: ghcr.io/halvorot/cert-portal:20250325161547
           imagePullPolicy: Always
-          env:
-            - name: NEXT_PUBLIC_SUPABASE_URL
-              value: https://bpydvhufllpenvzgzbwx.supabase.co
-            - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
-              value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJweWR2aHVmbGxwZW52emd6Ynd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1ODY2MjcsImV4cCI6MjAxNjE2MjYyN30.K_I-CgxO29YkMLA8xd7bz6gnM3jiOvUhd1CH9SEQyr0
           ports:
             - containerPort: 3000
