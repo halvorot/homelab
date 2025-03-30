@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: letsencrypt-cert-podinfo-halvorteigen
+  namespace: podinfo
+spec:
+  # secretName doesn't have to match the certificate name, but it may as well, for simplicity!
+  secretName: letsencrypt-cert-podinfo-halvorteigen
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "podinfo2.halvorteigen.no"
