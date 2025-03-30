@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - sealed-secrets.yaml
   - metallb.yaml
-  - cert-manager.yaml
+  - cert-manager
