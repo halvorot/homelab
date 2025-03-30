@@ -42,5 +42,3 @@ spec:
         loadBalancerIP: 192.168.1.250
       ingressClassResource:
         default: true
-      extraArgs:
-        enable-ssl-passthrough: true
