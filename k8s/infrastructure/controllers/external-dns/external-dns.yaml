@@ -21,11 +21,12 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: ">=8.7.8"
+      version: "8.7.x"
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
+      oci: false
   interval: 15m
   timeout: 5m
   releaseName: external-dns
@@ -71,9 +72,3 @@ spec:
       ## @param crd.create Install and use the integrated DNSEndpoint CRD
       ##
       create: true
-      ## @param crd.apiversion Sets the API version for the CRD to watch
-      ##
-      apiversion: ""
-      ## @param crd.kind Sets the kind for the CRD to watch
-      ##
-      kind: ""
