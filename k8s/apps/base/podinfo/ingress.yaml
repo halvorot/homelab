@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - podinfo2.halvorteigen.no
+        - podinfo.halvorteigen.no
       secretName: podinfo-halvorteigen-tls
   rules:
-    - host: podinfo2.halvorteigen.no
+    - host: podinfo.halvorteigen.no
       http:
         paths:
           - path: /
