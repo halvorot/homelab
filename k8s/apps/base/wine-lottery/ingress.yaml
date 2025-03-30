@@ -1,23 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: podinfo
+  name: wine-lottery
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - podinfo.halvorteigen.no
-      secretName: podinfo-halvorteigen-tls
+        - vinlotteri.halvorteigen.no
+      secretName: vinlotteri-halvorteigen-tls
   rules:
-    - host: podinfo.halvorteigen.no
+    - host: vinlotteri.halvorteigen.no
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: podinfo
+                name: wine-lottery
                 port:
                   number: 80
