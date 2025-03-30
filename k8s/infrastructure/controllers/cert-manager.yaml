@@ -30,75 +30,9 @@ spec:
   timeout: 5m
   releaseName: cert-manager
   values:
-    # Copyright Broadcom, Inc. All Rights Reserved.
-    # SPDX-License-Identifier: APACHE-2.0
-
-    ## Global Docker image parameters
-    ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
-    ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
-    ## @section Global parameters
-    ## @param global.imageRegistry Global Docker image registry
-    ## @param global.imagePullSecrets Global Docker registry secret names as an array
-    ## @param global.defaultStorageClass Global default StorageClass for Persistent Volume(s)
-    ## @param global.storageClass DEPRECATED: use global.defaultStorageClass instead
-    ##
-    global:
-      imageRegistry: ""
-      imagePullSecrets: [ ]
-      defaultStorageClass: ""
-      storageClass: ""
-      ## Security parameters
-      ##
-      security:
-        ## @param global.security.allowInsecureImages Allows skipping image verification
-        allowInsecureImages: false
-      ## Compatibility adaptations for Kubernetes platforms
-      ##
-      compatibility:
-        ## Compatibility adaptations for Openshift
-        ##
-        openshift:
-          ## @param global.compatibility.openshift.adaptSecurityContext Adapt the securityContext sections of the deployment to make them compatible with Openshift restricted-v2 SCC: remove runAsUser, runAsGroup and fsGroup and let the platform use their allowed default IDs. Possible values: auto (apply if the detected running cluster is Openshift), force (perform the adaptation always), disabled (do not perform adaptation)
-          ##
-          adaptSecurityContext: auto
-    ## @section Common parameters
-
-    ## @param kubeVersion Override Kubernetes version
-    ##
-    kubeVersion: ""
-    ## @param nameOverride String to partially override common.names.fullname
-    ##
-    nameOverride: ""
-    ## @param fullnameOverride String to fully override common.names.fullname
-    ##
-    fullnameOverride: ""
-    ## @param commonLabels Labels to add to all deployed objects
-    ##
-    commonLabels: { }
-    ## @param commonAnnotations Annotations to add to all deployed objects
-    ##
-    commonAnnotations: { }
-    ## @param extraDeploy Array of extra objects to deploy with the release
-    ##
-    extraDeploy: [ ]
-    ## @param logLevel Set up cert-manager log level
-    ##
-    logLevel: 2
-    ## @param clusterResourceNamespace Namespace used to store DNS provider credentials etc. for ClusterIssuer resources. If empty, uses the namespace where the controller is deployed.
-    ##
-    clusterResourceNamespace: ""
-    ## @param leaderElection.namespace Namespace which leaderElection works.
-    ##
-    leaderElection:
-      namespace: "kube-system"
     ## @param installCRDs Flag to install cert-manager CRDs
     ##
     installCRDs: true
-    ## @param replicaCount Number of cert-manager replicas
-    ##
-    replicaCount: 1
-    ## @section Controller deployment parameters
-
     ## Controller deployment parameters
     ##
     controller:
