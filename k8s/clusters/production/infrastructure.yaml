@@ -23,6 +23,10 @@ spec:
       kind: Deployment
       name: cert-manager
       namespace: cert-manager
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx-ingress-controller
+      namespace: nginx-ingress-controller
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
