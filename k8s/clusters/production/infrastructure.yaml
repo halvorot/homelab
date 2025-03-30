@@ -19,6 +19,10 @@ spec:
       kind: Deployment
       name: metallb-controller
       namespace: metallb-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: external-dns
+      namespace: external-dns
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

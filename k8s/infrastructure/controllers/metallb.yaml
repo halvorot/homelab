@@ -29,18 +29,7 @@ spec:
   interval: 15m
   timeout: 5m
   releaseName: metallb
-  valuesFrom:
-    - kind: ConfigMap
-      name: metallb-helm-chart-value-overrides
-      valuesKey: values.yaml # This is the default, but best to be explicit for clarity
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: metallb-helm-chart-value-overrides
-  namespace: metallb-system
-data:
-  values.yaml: |-
+  values:
     # Default values for metallb.
     # This is a YAML-formatted file.
     # Declare variables to be passed into your templates.
