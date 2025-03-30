@@ -23,6 +23,10 @@ spec:
       kind: HelmRelease
       name: external-dns
       namespace: external-dns
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cert-manager
+      namespace: cert-manager
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
