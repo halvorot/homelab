@@ -26,7 +26,6 @@ spec:
         kind: HelmRepository
         name: external-dns
         namespace: flux-system
-      oci: false
   interval: 15m
   timeout: 5m
   releaseName: external-dns
