@@ -10,6 +10,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
+      - http01:
+          ingress:
+            ingressClassName: nginx
       - selector:
           dnsZones:
             - "halvorteigen.no"

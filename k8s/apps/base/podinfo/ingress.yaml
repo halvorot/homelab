@@ -4,11 +4,12 @@ metadata:
   name: podinfo
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
     - hosts:
         - podinfo2.halvorteigen.no
-      secretName: letsencrypt-cert-podinfo-halvorteigen
+      secretName: podinfo-halvorteigen-tls
   rules:
     - host: podinfo2.halvorteigen.no
       http:
