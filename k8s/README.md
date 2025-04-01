@@ -23,9 +23,25 @@ flux install
 
 ## Infrastructure
 
+### MetalLB
+
+[MetalLB](https://metallb.io) is a load balancer controller for bare metal k8s clusters.
+It assigns external IP addresses to the services in the cluster with the type LoadBalancer.
+
+My MetalLB controller is deployed in L2 mode because my router does not support BGP.
+
+### Ingress controller
+
+[ingress-nginx](https://github.com/kubernetes/ingress-nginx) is used as the Ingress controller for Kubernetes.
+This acts as a reverse proxy and load balancer.
+
+### Cert manager
+
+[cert-manager](https://cert-manager.io) is used to manage TLS certificates for the ingresses.
+
 ### Cloudflare Tunnel
 A [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) is used to expose services online.
-The tunnel client runs inside the cluster and routes traffic from cloudflare to the correct kubernetes service.
+The tunnel client runs inside the cluster and routes traffic from cloudflare to the Ingress NGINX Controller.
 
 ### Sealed secrets
 
