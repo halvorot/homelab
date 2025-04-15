@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: excalidraw
-          image: excalidraw/excalidraw:0.18.0
+          image: excalidraw/excalidraw:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
