@@ -8,5 +8,8 @@
       "matchUpdateTypes": ["*"],
       "automerge": false
     }
-  ]
+  ],
+  "kubernetes": {
+    "fileMatch": ["k8s/.+\\.yaml$"]
+  }
 }
