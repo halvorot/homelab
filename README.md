@@ -11,8 +11,8 @@ This repository contains some files and configuration for my home lab setup.
 
 ## Infrastructure
 
-### Tailscale
-[Tailscale](https://tailscale.com) is used for secure VPN access to the homelab.
-
 ### K8S
 See the [K8S README](k8s/README.md)
+
+### Tailscale
+[Tailscale](https://tailscale.com) is used for secure VPN access to the homelab.
