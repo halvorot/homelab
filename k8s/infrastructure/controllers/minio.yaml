@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio
+  labels:
+    name: minio
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pv-claim
+  namespace: minio
+  labels:
+    app: minio-storage-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  selector:
+    app: minio
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: minio-secret
+  namespace: minio
+spec:
+  encryptedData:
+    minio_access_key: AgCu3sXEf5UPBbg3ew0mxAQ74nZuFIzW/dSqB1t0D0ydEcBbWyi5cP5hUcH67qQPe8whqJ0K03PuuiZAED/RGP6wiGZ0H7sPHnVYExiENw/daKLgEjRTHzc/nMIynbuoyNMAAgysEyXMbKo27wprdJB/kAMNbyKDxPVP1zRayKaw+tkBYUbkNK+3bxzKeDaw1HsniRkX9xw1z6/uq2/8P7guQcOELhXN/MCACsvZjxmY6mzuRH9ayPUjbVZuAf68zA3pII3Ht3PtvFAVgSj9GczArJqP9Zbv0sGUfU9ICn+yqw3Boki9sTqm3bSQR36ypWRVkrVnAJQAzpJ8sgUwx2hemd9tj27SNjp6abyPl36/pjTJeErKYXIL4lo0RRq+dqwgtDvRh5mHJpRbu/JeFknwwg0JWy2cEWywR14odki351N2a1b9+D7UD9SaLlfrdkTjuMHuVu598P+1qfFk/ofcaAUWReq7xtj1jmFinl3yrA+Jonn4yE57yjoHsfLeKUF1TeZtPY9Wbz/tvbBD5lAJyRnqz7qNnRb41Uf7vuREjv4j+yFX6kD9KCmLDrGx1CmJxbt+mg1gTSr5nK02GStLw6nuyxgCWuVUgICGFNhTdzOgtNJ/kOy/222Zn14jIbeocMG5pL/NbaS7XXC/v6qo5bnMerpIB32/QDPsn8BQ9FMjGaZ5zA0rsTd9CIlMUGR9ZbEutA==
+    minio_secret_key: AgA8a3LR0r1dOp1yNoOdyCEZRsknIF/BAY+trTnHsS2lnPeut1AyysxB3qjMM5NXjfULS8+4S2yDG/HfXlSWCTCX8GJ6R95M4Uo3IWSzLPN2ge39GQXTLrIQhfyxj2AC+ZrQLYT9Y8Poq9tByPLxf62xzGftxf+n1lfzrMjbio457c2qReiYAmcO0WVGNnxqqRyh9orjjPeC+kSogoSVHS0d4vrdEZVy5N+xLczUpcf9p/uqPEzoYzeF2ru6zFNgIjpYtTRCgFlEvxFg3m8VDhk1B6Sgob+svOn5R58D24DKdjc+sSYI0aOuB371WVzWzhH2biTC1mSnTIeY8I8wL/PtEVNeu/dxTvBbXOjIWPh6NNuuK4jgQ7XtRJy0HcBdxnDpEHU28Jg2Qrm6WtXgUsS6wFfqj/cQV+G+ShBCda5t/w4ztl9zG6nVtBrLPNrIUahULil4dwPx/yO019DtwG94bEBVFVgORPxsr+8w+yUqMKVJKdhSb5O7vk8rlcLr7iLWgEy9qosGwpkZ9XpGLQzgHH9FHZV0aghyJyupIJPPOjNEDfXDELesF45eXJOYN8wYRDjTfJAamdCuypItefenAbAXH4IvoJQAAUape18+KmiVkWtfbmAxAe/ZKEPLPEIDCqVkIX9thFEzBByiaBHC3DPjghVfTbfnrv97IqmVnc8+tozwmsMOS1ksczDAd3KWIWNhi26WjjH8su4vejo=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: minio-secret
+      namespace: minio
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          image: quay.io/minio/minio:RELEASE.2025-04-08T15-41-24Z
+          args:
+            - server
+            - /storage
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: minio_access_key
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: minio_secret_key
+          ports:
+            - containerPort: 9000
+              hostPort: 9000
+          volumeMounts:
+            - name: minio-storage # must match the volume name
+              mountPath: "/storage"
+      volumes:
+        - name: minio-storage
+          persistentVolumeClaim:
+            claimName: minio-pv-claim

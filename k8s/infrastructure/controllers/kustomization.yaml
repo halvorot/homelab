@@ -5,3 +5,5 @@ resources:
   - metallb.yaml
   - cert-manager
   - ingress-nginx.yaml
+  - minio.yaml
+  - monitoring
