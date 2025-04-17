@@ -36,6 +36,8 @@ spec:
     remediation:
       retries: 3
   values:
+    csi:
+      kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
     defaultSettings:
       defaultDataPath: /mnt/data/longhorn
     persistence:
