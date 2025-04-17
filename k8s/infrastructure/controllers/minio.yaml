@@ -79,6 +79,14 @@ spec:
           volumeMounts:
             - name: minio-storage # must match the volume name
               mountPath: "/storage"
+          readinessProbe:
+            exec:
+              command:
+                - mc
+                - ready
+                - local
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
       volumes:
         - name: minio-storage
           persistentVolumeClaim:

@@ -27,6 +27,14 @@ spec:
       kind: Deployment
       name: ingress-nginx
       namespace: ingress-nginx
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: longhorn-driver-deployer
+      namespace: longhorn
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: minio
+      namespace: minio
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
