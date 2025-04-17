@@ -59,6 +59,7 @@ spec:
           args:
             - server
             - /storage
+            - --console-address ":9001"
           env:
             - name: MINIO_ACCESS_KEY
               valueFrom:
