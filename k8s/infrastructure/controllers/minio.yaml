@@ -21,19 +21,6 @@ spec:
     requests:
       storage: 10Gi
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: minio
-  namespace: minio
-spec:
-  selector:
-    app: minio
-  ports:
-    - port: 9000
-      targetPort: 9000
-      protocol: TCP
----
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -49,7 +36,6 @@ spec:
       creationTimestamp: null
       name: minio-secret
       namespace: minio
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -94,3 +80,41 @@ spec:
         - name: minio-storage
           persistentVolumeClaim:
             claimName: minio-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  selector:
+    app: minio
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ui
+  namespace: minio
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - minio.halvorteigen.no
+      secretName: minio-halvorteigen-tls
+  rules:
+    - host: minio.halvorteigen.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
