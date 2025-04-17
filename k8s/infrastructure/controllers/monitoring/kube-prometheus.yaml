@@ -34,9 +34,6 @@ spec:
     crds:
       create: false
     grafana:
-      service:
-        type: LoadBalancer
-        port: 80
       persistence:
         enabled: true
         accessModes:
@@ -52,7 +49,7 @@ spec:
             spec:
               accessModes:
                 - ReadWriteOnce
-              storageClassName: standard
+              storageClassName: longhorn
               resources:
                 requests:
                   storage: 8Gi
