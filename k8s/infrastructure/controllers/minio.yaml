@@ -58,9 +58,9 @@ spec:
           image: quay.io/minio/minio:RELEASE.2025-04-08T15-41-24Z
           args:
             - server
-            - /storage
             - "--console-address"
             - ":9001"
+            - /storage
           env:
             - name: MINIO_ACCESS_KEY
               valueFrom:
