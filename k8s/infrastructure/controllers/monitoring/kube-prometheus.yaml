@@ -43,7 +43,7 @@ spec:
       prometheusSpec:
         remoteWriteDashboards: false
         serverSideApply: true
-        retention: 12h
+        retention: 7d
         storageSpec:
           volumeClaimTemplate:
             spec:
