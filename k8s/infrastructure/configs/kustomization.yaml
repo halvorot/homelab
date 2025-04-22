@@ -4,3 +4,5 @@ resources:
   - cloudflared
   - metallb.yaml
   - cert-manager
+  - minio.yaml
+  - monitoring

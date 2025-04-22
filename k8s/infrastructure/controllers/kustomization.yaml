@@ -6,5 +6,3 @@ resources:
   - cert-manager
   - ingress-nginx.yaml
   - longhorn.yaml
-  - minio.yaml
-  - monitoring
