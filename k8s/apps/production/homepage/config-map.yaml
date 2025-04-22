@@ -28,34 +28,28 @@ data:
   services.yaml: |
     - Apps:
         - Wine Lottery website:
-          icon: emby.png
           href: "https://vinlotteri.halvorteigen.no"
           namespace: wine-lottery
           app: wine-lottery
         - Cert Portal website:
-          icon: emby.png
           href: "https://certportal.halvorteigen.no"
           namespace: cert-portal
           app: cert-portal
         - Excalidraw:
-          icon: emby.png
           href: "https://excalidraw.halvorteigen.no"
           namespace: excalidraw
           app: excalidraw
 
     - Backend Services:
         - Grafana:
-          icon: emby.png
           href: "https://grafana.halvorteigen.no"
           namespace: monitoring
           app: monitoring
         - Minio:
-          icon: emby.png
           href: "https://minio.halvorteigen.no"
           namespace: minio
           app: minio
         - Longhorn:
-          icon: emby.png
           href: "https://longhorn.halvorteigen.no"
           namespace: longhorn
           app: longhorn
