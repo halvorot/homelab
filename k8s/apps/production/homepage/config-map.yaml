@@ -57,6 +57,7 @@ data:
             namespace: minio
             app: minio
         - Longhorn:
+            icon: "https://longhorn.io/img/logos/longhorn-icon-color.png"
             href: "https://longhorn.halvorteigen.no"
             namespace: longhorn
             app: longhorn
