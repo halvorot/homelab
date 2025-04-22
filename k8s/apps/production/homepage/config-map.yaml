@@ -21,10 +21,12 @@ data:
         - Github:
             - abbr: GH
               href: https://github.com/halvorot
+              icon: "si-github"
     - Social:
         - LinkedIn:
             - abbr: in
               href: https://www.linkedin.com/in/halvor-teigen/
+              icon: "si-linkedin"
   services.yaml: |
     - Apps:
         - Wine Lottery website:
@@ -38,10 +40,12 @@ data:
 
     - Backend Services:
         - Grafana:
+            icon: "si-grafana-#F46800"
             href: "https://grafana.halvorteigen.no"
             namespace: monitoring
             app: monitoring
         - Minio:
+            icon: "si-minio-#C72E49"
             href: "https://minio.halvorteigen.no"
             namespace: minio
             app: minio
@@ -51,6 +55,7 @@ data:
             app: longhorn
         - Proxmox:
             href: "https://proxmox.halvorteigen.no"
+            icon: "si-proxmox-#E57000"
   widgets.yaml: |
     - kubernetes:
         cluster:
