@@ -28,33 +28,33 @@ data:
   services.yaml: |
     - Apps:
         - Wine Lottery website:
-          href: "https://vinlotteri.halvorteigen.no"
-          namespace: wine-lottery
-          app: wine-lottery
+            href: "https://vinlotteri.halvorteigen.no"
+            namespace: wine-lottery
+            app: wine-lottery
         - Cert Portal website:
-          href: "https://certportal.halvorteigen.no"
-          namespace: cert-portal
-          app: cert-portal
+            href: "https://certportal.halvorteigen.no"
+            namespace: cert-portal
+            app: cert-portal
         - Excalidraw:
-          href: "https://excalidraw.halvorteigen.no"
-          namespace: excalidraw
-          app: excalidraw
+            href: "https://excalidraw.halvorteigen.no"
+            namespace: excalidraw
+            app: excalidraw
 
     - Backend Services:
         - Grafana:
-          href: "https://grafana.halvorteigen.no"
-          namespace: monitoring
-          app: monitoring
+            href: "https://grafana.halvorteigen.no"
+            namespace: monitoring
+            app: monitoring
         - Minio:
-          href: "https://minio.halvorteigen.no"
-          namespace: minio
-          app: minio
+            href: "https://minio.halvorteigen.no"
+            namespace: minio
+            app: minio
         - Longhorn:
-          href: "https://longhorn.halvorteigen.no"
-          namespace: longhorn
-          app: longhorn
+            href: "https://longhorn.halvorteigen.no"
+            namespace: longhorn
+            app: longhorn
         - Proxmox:
-          href: "https://proxmox.halvorteigen.no"
+            href: "https://proxmox.halvorteigen.no"
   widgets.yaml: |
     - kubernetes:
         cluster:
