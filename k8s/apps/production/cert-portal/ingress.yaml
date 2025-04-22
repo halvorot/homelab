@@ -4,6 +4,10 @@ metadata:
   name: cert-portal
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Apps
+    gethomepage.dev/name: Cert Portal Website
+    gethomepage.dev/widget.url: "https://certportal.halvorteigen.no"
 spec:
   ingressClassName: nginx
   tls:

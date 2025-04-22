@@ -31,10 +31,6 @@ data:
             href: "https://vinlotteri.halvorteigen.no"
             namespace: wine-lottery
             app: wine-lottery
-        - Cert Portal website:
-            href: "https://certportal.halvorteigen.no"
-            namespace: cert-portal
-            app: cert-portal
         - Excalidraw:
             href: "https://excalidraw.halvorteigen.no"
             namespace: excalidraw
