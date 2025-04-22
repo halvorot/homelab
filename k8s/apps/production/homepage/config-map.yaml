@@ -30,10 +30,17 @@ data:
   services.yaml: |
     - Apps:
         - Wine Lottery website:
+            icon: "si-wine-#800000"
             href: "https://vinlotteri.halvorteigen.no"
             namespace: wine-lottery
             app: wine-lottery
+        - Cert Portal website:
+            icon: "si-c-#3b82f6"
+            href: "https://certportal.halvorteigen.no"
+            namespace: cert-portal
+            app: cert-portal
         - Excalidraw:
+            icon: "si-excalidraw-#6965DB"
             href: "https://excalidraw.halvorteigen.no"
             namespace: excalidraw
             app: excalidraw
