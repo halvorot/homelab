@@ -42,6 +42,7 @@ spec:
       defaultDataPath: /mnt/data/longhorn
     persistence:
       defaultClass: true
+      defaultClassReplicaCount: 2
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
