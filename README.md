@@ -2,6 +2,8 @@
 
 This repository contains some files and configuration for my home lab setup.
 
+### Homelab homepage: [homelab.halvorteigen.no](https://homelab.halvorteigen.no)
+
 ## Hardware
 
 **GIGABYTE Brix GB-BR i7-10710**
