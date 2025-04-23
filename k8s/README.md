@@ -49,3 +49,17 @@ The tunnel client runs inside the cluster and routes traffic from cloudflare to 
 The controller runs in the cluster and decrypts the sealed secrets into regular kubernetes secrets.
 The [public key](public-keys/pub-sealed-secrets.pem) can be used to encrypt the secret so that it can safely be stored in git.
 The procedure is explained on the FluxCD website [fluxcd.io/flux/guides/sealed-secrets/](https://fluxcd.io/flux/guides/sealed-secrets/)
+
+### Longhorn
+
+[Longhorn](https://longhorn.io) is used as the storage provider to enable provisioning of persistent volume claims.
+Longhorn supports high availability and includes functionality for snapshots and backups.
+
+### MinIO
+
+[MinIO](https://min.io) is used for S3 compatible bucket storage.
+
+### Kube-Prometheus-Stack
+
+The [Kube-Prometheus-Stack](https://github.com/prometheus-operator/kube-prometheus) is used for monitoring.
+The stack contains Grafana, Prometheus and AlertManager as a robust monitoring system for k8s.
