@@ -36,16 +36,16 @@ spec:
     remediation:
       retries: 3
   values:
+    defaultSettings:
+      defaultDataPath: /mnt/data/longhorn
+    persistence:
+      defaultClass: true
     csi:
       kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
       attacherReplicaCount: 2
       provisionerReplicaCount: 2
       resizerReplicaCount: 2
       snapshotterReplicaCount: 1
-    defaultSettings:
-      defaultDataPath: /mnt/data/longhorn
-    persistence:
-      defaultClass: true
     longhornUI:
       replicas: 1
 ---
