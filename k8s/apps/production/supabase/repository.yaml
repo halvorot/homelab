@@ -2,11 +2,11 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: teochenglim
+  name: supabase
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://teochenglim.github.io/helm-charts/
+  url: https://github.com/supabase-community/supabase-kubernetes
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -16,10 +16,10 @@ metadata:
 spec:
   chart:
     spec:
-      chart: supabase
+      chart: supabase-community/supabase
       sourceRef:
         kind: HelmRepository
-        name: teochenglim
+        name: supabase
       version: ">=0.1.3"
   interval: 1h0m0s
   targetNamespace: supabase
