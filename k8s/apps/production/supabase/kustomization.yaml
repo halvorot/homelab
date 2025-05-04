@@ -10,3 +10,4 @@ resources:
   - s3-secret-sealed.yaml
   - smtp-secret-sealed.yaml
   - values-configmap.yaml
+  - namespace.yaml
