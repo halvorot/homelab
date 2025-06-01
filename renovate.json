@@ -7,6 +7,10 @@
     {
       "matchUpdateTypes": ["*"],
       "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["^ghcr.io/halvorot/cert-portal$"],
+      "automerge": true
     }
   ],
   "kubernetes": {
