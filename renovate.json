@@ -3,16 +3,6 @@
   "extends": [
     "local>halvorot/renovate-config"
   ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["*"],
-      "automerge": false
-    },
-    {
-      "matchPackagePatterns": ["^ghcr.io/halvorot/cert-portal$"],
-      "automerge": true
-    }
-  ],
   "kubernetes": {
     "fileMatch": ["k8s/.+\\.yaml$"]
   }
