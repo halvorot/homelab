@@ -16,7 +16,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: cert-portal
-          image: ghcr.io/halvorot/cert-portal:20251009220215
+          image: ghcr.io/halvorot/cert-portal:20251010173444
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
