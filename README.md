@@ -1,6 +1,8 @@
-# My HomeLab
+# My HomeLab [Decommissioned]
 
 This repository contains some files and configuration for my home lab setup.
+
+The homelab is decommissioned and no longer running.
 
 ### Homelab homepage: [homelab.halvorteigen.no](https://homelab.halvorteigen.no)
 
